@@ -1,4 +1,5 @@
-import { defineConfig } from "vite";
+/// <reference types="vitest" />
+import { defineConfig } from "vitest/config";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -32,5 +33,21 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     target: "node16",
+  },
+  test: {
+    globals: true,
+    environment: "node",
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
+      include: ["src/**/*.ts"],
+      exclude: ["src/types.d.ts", "src/**/*.test.ts", "src/index.ts"],
+    },
   },
 });
