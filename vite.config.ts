@@ -20,7 +20,6 @@ export default defineConfig({
         "figlet",
         "log-update",
         "node-notifier",
-        "parse-duration",
         "readline",
         "ansi-escapes",
         "fs",
