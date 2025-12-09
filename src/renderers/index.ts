@@ -16,11 +16,6 @@ interface FontMetrics {
  * @param ms - The duration in milliseconds.
  * @returns Formatted string "HH:MM:SS".
  */
-/**
- * Formats milliseconds into HH:MM:SS duration string.
- * @param ms - The duration in milliseconds.
- * @returns Formatted string "HH:MM:SS".
- */
 function formatDuration(ms: number): string {
   const totalSeconds = Math.ceil(ms / 1000);
   const seconds = totalSeconds % 60;
