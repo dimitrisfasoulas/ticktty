@@ -1,6 +1,6 @@
 {
   "name": "ticktty",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "main": "dist/index.cjs",
   "bin": {
@@ -12,11 +12,13 @@
     "start": "node dist/index.cjs",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
+    "test:smoke": "vite-node scripts/smoke-test.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm run build && npm run test:smoke"
   },
   "keywords": [],
   "author": "Dimitrios Fasoulas <dfasoulas@gmail.com>",
