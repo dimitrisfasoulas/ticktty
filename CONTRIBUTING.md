@@ -31,4 +31,4 @@ The following is a set of guidelines for contributing to **TickTTY**.
 - Follow the existing code style.
 - Ensure your code is formatted correctly.
 - Add comments where necessary.
-  uctive in discussions.
+- Be productive in discussions.

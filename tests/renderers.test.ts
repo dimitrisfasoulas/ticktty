@@ -1,8 +1,16 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeEach,
+  afterEach,
+  type MockInstance,
+} from "vitest";
 import { render } from "../src/renderers/index";
 
 describe("Renderers (Integration)", () => {
-  let stdoutSpy;
+  let stdoutSpy: MockInstance;
 
   beforeEach(() => {
     stdoutSpy = vi
@@ -20,7 +28,9 @@ describe("Renderers (Integration)", () => {
     render(date, "digital", null);
 
     expect(stdoutSpy).toHaveBeenCalled();
-    const calls = stdoutSpy.mock.calls.map((c) => c[0]).join("");
+    const calls = stdoutSpy.mock.calls
+      .map((c: unknown[]) => String(c[0]))
+      .join("");
     // Digital clock outputs ASCII art, so we can't search for "10:00:00" easily.
     // We can check for the footer which is always present in digital mode
     expect(calls).toContain("Font: Standard");
@@ -41,7 +51,9 @@ describe("Renderers (Integration)", () => {
       render(date, "analog", null);
 
       expect(stdoutSpy).toHaveBeenCalled();
-      const calls = stdoutSpy.mock.calls.map((c) => c[0]).join("");
+      const calls = stdoutSpy.mock.calls
+        .map((c: unknown[]) => String(c[0]))
+        .join("");
       // Check for analog clock specific characters
       // We check for the center point and face markers which are reliable
       expect(calls).toContain("⊕");
@@ -90,5 +102,13 @@ describe("Renderers (Integration)", () => {
     const calls = stdoutSpy.mock.calls.map((c) => c[0]).join("");
     expect(calls).toContain("00:01:05");
     expect(calls).toContain("My Timer");
+  });
+  it("should render paused state", () => {
+    const ms = 65000;
+    render(ms, "text", "My Timer", "Standard", true);
+
+    expect(stdoutSpy).toHaveBeenCalled();
+    const calls = stdoutSpy.mock.calls.map((c) => c[0]).join("");
+    expect(calls).toContain("PAUSED");
   });
 });

@@ -50,7 +50,7 @@ describe("Config Utility (Integration)", () => {
     fs.mkdirSync(configDir, { recursive: true });
     fs.writeFileSync(
       configPath,
-      JSON.stringify({ style: "analog", fontIndex: 1 })
+      JSON.stringify({ style: "analog", fontIndex: 1 }),
     );
 
     const config = loadConfig();
